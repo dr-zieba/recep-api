@@ -1,0 +1,14 @@
+#Build image from Dockerfile
+docker build .
+
+#Build service/container from docker-compose.yml
+docker-compose build
+
+#Run flake8
+docker-compose run --rm app sh -c "flake8"
+
+#Build django project
+docker-compose run --rm app sh -c "django-admin startproject app ."
+
+#Run service/container
+docker-compose up
