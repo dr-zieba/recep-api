@@ -1,3 +1,2 @@
-
-def calc(a: int ,b: int) -> int:
+def calc(a: int, b: int) -> int:
     return a + b
