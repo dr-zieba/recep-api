@@ -1,5 +1,5 @@
 from django.test import SimpleTestCase
-from app import calc
+from app.calc import calc
 
 class CalcTest(SimpleTestCase):
     def test_calc(self):
