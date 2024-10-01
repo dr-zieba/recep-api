@@ -24,7 +24,8 @@ class CommandTest(SimpleTestCase):
     def test_wait_for_db_not_ready(self, patched_sleep, patched_check):
         """Test when db is not ready"""
 
-        # Simulates checks with returned values like Psycopq2Error, OperationalError and True = db finally got ready
+        # Simulates checks with returned values like Psycopq2Error,
+        # OperationalError and True = db finally got ready
         patched_check.side_effects = (
             [Psycopq2Error] * 2 + [OperationalError] * 3 + [True]
         )
