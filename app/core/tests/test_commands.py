@@ -10,7 +10,7 @@ from django.db.utils import OperationalError
 from django.test import SimpleTestCase
 
 
-@patch("core.management.commands.wait_for_db.Command.check") 
+@patch("core.management.commands.wait_for_db.Command.check")
 class CommandTest(SimpleTestCase):
     """Test class for commands"""
 
@@ -26,7 +26,8 @@ class CommandTest(SimpleTestCase):
 
         # Simulates checks with returned values like Psycopq2Error,
         # OperationalError and True = db finally got ready
-        patched_check.side_effect = [Psycopq2Error] * 2 + [OperationalError] * 3 + [True]
+        patched_check.side_effect = [Psycopq2Error] * 2 \
+                                    + [OperationalError] * 3 + [True]
 
         call_command("wait_for_db")
 
