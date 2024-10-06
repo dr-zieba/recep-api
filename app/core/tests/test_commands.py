@@ -26,10 +26,9 @@ class CommandTest(SimpleTestCase):
 
         # Simulates checks with returned values like Psycopq2Error,
         # OperationalError and True = db finally got ready
-        patched_check.side_effects = [Psycopq2Error] * 2 + [OperationalError] * 3 + [True]
+        patched_check.side_effect = [Psycopq2Error] * 2 + [OperationalError] * 3 + [True]
 
-        for error in patched_check.side_effects:
-            call_command("wait_for_db")
+        call_command("wait_for_db")
 
         self.assertEqual(patched_check.call_count, 6)
         patched_check.assert_called_with(databases=["default"])
