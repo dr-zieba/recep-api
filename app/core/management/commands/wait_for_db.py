@@ -4,7 +4,7 @@ Command to wait for the database before django will start
 import time
 from django.core.management.base import BaseCommand
 
-from psycopg2 import OperationError as Psycopg2Error
+from psycopg2 import OperationalError as Psycopg2Error
 from django.db.utils import OperationalError
 
 
