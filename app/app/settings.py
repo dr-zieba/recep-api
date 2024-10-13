@@ -132,4 +132,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Defines user model used by project
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = "core.User"

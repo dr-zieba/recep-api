@@ -1,16 +1,23 @@
 """
 Django db models
 """
+
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
+
 
 # Create your models here.
 class UserManager(BaseUserManager):
     """Users manager"""
+
     def create_user(self, email, password=None, **extra_fields):
         """Creates new user"""
         if not email:
-            raise ValueError('Email can not be empty')
+            raise ValueError("Email can not be empty")
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -20,7 +27,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password):
         """Creates new superuser"""
         if not email:
-            raise ValueError('Email can not be empty')
+            raise ValueError("Email can not be empty")
         user = self.model(email=self.normalize_email(email))
         user.is_staff = True
         user.is_superuser = True
@@ -32,6 +39,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom User model"""
+
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
@@ -41,6 +49,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     # defines field with which user will log in
-    USERNAME_FIELD = 'email'
-
-
+    USERNAME_FIELD = "email"
