@@ -2,8 +2,10 @@
 Model test cases
 """
 
+from decimal import Decimal
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from core import models
 
 
 class ModelTests(TestCase):
@@ -37,9 +39,21 @@ class ModelTests(TestCase):
             get_user_model().objects.create_user(email="", password="password")
 
     def test_crate_super_user(self):
-        """Create super user"""
+        """Create superuser"""
         user = get_user_model().objects.create_superuser(
             email="test2@test.com", password="password"
         )
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_recipe(self):
+        """Test create recipe api"""
+        user = get_user_model().objects.create_user("test@example.com", "pass123")
+        recipe = models.Recipe.objects.create(
+            user=user,
+            title="Test title",
+            time_minutes=5,
+            price=Decimal("5.5"),
+            description="Test description",
+        )
+        self.assertEqual(str(recipe), recipe.title)
